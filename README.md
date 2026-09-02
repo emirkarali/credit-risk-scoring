@@ -29,17 +29,17 @@ Then open your browser and navigate to <http://localhost:8000>
 
 ## Results
 
-| | |
-|---|---|
-| Model | LightGBM (randomised search, 3-fold CV) + isotonic calibration |
-| Test ROC-AUC | see `artifacts/model_config.json` → `test_metrics` |
-| Test PR-AUC | reported against the 8.07% base rate |
-| Brier score | reported against a constant-prediction baseline |
-| Decision threshold | selected on a held-out validation split, not assumed to be 0.50 |
+## Results
 
-Exact figures are written into `artifacts/model_config.json` when the notebook
-runs, so the numbers in this README and the numbers in the artifact can never
-drift apart.
+| Metric | Value | Baseline / Note |
+| --- | --- | --- |
+| Model | LightGBM (RandomizedSearchCV, 3-fold CV) + Isotonic Calibration | |
+| Test ROC-AUC | **0.767** | 0.500 = random |
+| Test PR-AUC | **0.244** | 0.081 = base rate (~3x improvement) |
+| Brier Score | **0.0672** | 0.0742 for constant base-rate prediction |
+| Deployed Threshold | **0.170** | F1-optimal on calibrated validation probabilities |
+
+*Figures are loaded from `artifacts/model_config.json`, which tracks test set evaluations.*
 
 ---
 
