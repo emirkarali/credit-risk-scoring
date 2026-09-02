@@ -10,6 +10,18 @@ exploratory analysis through a calibrated model to a served scoring interface.
 
 ---
 
+## 🚀 Quick Start with Docker
+
+You can spin up the application in seconds without worrying about local Python dependencies:
+
+```bash
+docker build -t credit-risk-app .
+docker run -p 8000:8000 credit-risk-app
+```
+Then open your browser and navigate to http://localhost:8000
+
+---
+
 ## Results
 
 | | |
@@ -248,11 +260,3 @@ MIT — see [LICENSE](LICENSE).
 Dataset © Home Credit Group, used under the terms of the Kaggle competition.
 
 ---
-
-## 🐳 Running with Docker
-
-To run the application in an isolated environment without dependency issues:
-
-```bash
-docker build -t credit-risk-app .
-docker run -p 8000:8000 credit-risk-app
