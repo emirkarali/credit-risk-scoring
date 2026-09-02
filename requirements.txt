@@ -1,0 +1,34 @@
+# Versions are constrained rather than left open on purpose.
+#
+# artifacts/credit_risk_model.joblib is a pickle. Loading it under a different
+# scikit-learn minor version can fail outright (attribute errors inside
+# SimpleImputer, ColumnTransformer, etc.), so scikit-learn is pinned to a
+# single minor release. After running the notebook, the exact versions used at
+# training time are written into artifacts/model_config.json under "versions" —
+# pin to those if you need bit-for-bit reproducibility.
+
+# --- modelling ---
+pandas~=2.2
+numpy~=2.1
+scipy~=1.14
+scikit-learn~=1.7.0
+lightgbm~=4.5
+joblib~=1.4
+
+# --- analysis and explainability ---
+matplotlib~=3.9
+seaborn~=0.13
+shap~=0.46
+jupyter~=1.1
+
+# --- serving ---
+# jinja2 is required by fastapi.templating.Jinja2Templates but is NOT pulled in
+# by plain `fastapi` — only by the `fastapi[standard]` extra. Declaring it here
+# explicitly avoids an ImportError on a clean install.
+fastapi~=0.115
+uvicorn[standard]~=0.32
+jinja2~=3.1
+
+# --- development ---
+pytest~=8.3
+httpx~=0.27          # required by fastapi.testclient

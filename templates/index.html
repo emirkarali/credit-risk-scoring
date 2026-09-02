@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Credit Risk Predictor</title>
+    <link rel="stylesheet" href="/static/styles.css" />
+  </head>
+  <body>
+    <div class="page-shell">
+      <header class="hero panel">
+        <div class="hero-badge">Calibrated LightGBM &middot; Home Credit</div>
+        <h1>Credit Risk Assessment</h1>
+        <p>
+          Enter the application details below. The model was trained on
+          <strong id="totalColumnsText">124</strong> columns; anything left blank is imputed with a
+          training statistic, so a sparsely filled form is pulled toward the average applicant.
+          Financial ratios are derived server-side using the same formulas as training.
+        </p>
+      </header>
+
+      <main class="app-grid">
+        <section class="panel form-panel">
+          <div class="panel-header">
+            <h2>Application Details</h2>
+            <span class="panel-tag">Key inputs</span>
+          </div>
+
+          <form id="riskForm" novalidate>
+            <div class="form-grid">
+              <div class="field">
+                <label for="NAME_CONTRACT_TYPE">Loan type</label>
+                <select id="NAME_CONTRACT_TYPE" name="NAME_CONTRACT_TYPE" required>
+                  <option value="">Select</option>
+                  <option value="Cash loans">Cash loan</option>
+                  <option value="Revolving loans">Revolving loan</option>
+                </select>
+              </div>
+
+              <div class="field">
+                <label for="FLAG_OWN_CAR">Owns a car?</label>
+                <select id="FLAG_OWN_CAR" name="FLAG_OWN_CAR" required>
+                  <option value="">Select</option>
+                  <option value="yes">Yes</option>
+                  <option value="no">No</option>
+                </select>
+              </div>
+
+              <div class="field">
+                <label for="FLAG_OWN_REALTY">Owns real estate?</label>
+                <select id="FLAG_OWN_REALTY" name="FLAG_OWN_REALTY" required>
+                  <option value="">Select</option>
+                  <option value="yes">Yes</option>
+                  <option value="no">No</option>
+                </select>
+              </div>
+
+              <div class="field">
+                <label for="age_years">Age</label>
+                <input id="age_years" name="age_years" type="number" min="18" max="80" placeholder="e.g. 32" required />
+              </div>
+
+              <div class="field">
+                <label for="CNT_CHILDREN">Number of children</label>
+                <input id="CNT_CHILDREN" name="CNT_CHILDREN" type="number" min="0" step="1" placeholder="0" required />
+              </div>
+
+              <div class="field">
+                <label for="AMT_INCOME_TOTAL">Monthly income</label>
+                <input id="AMT_INCOME_TOTAL" name="AMT_INCOME_TOTAL" type="number" min="0" step="1" placeholder="250000" required />
+              </div>
+
+              <div class="field">
+                <label for="AMT_CREDIT">Loan amount</label>
+                <input id="AMT_CREDIT" name="AMT_CREDIT" type="number" min="0" step="1" placeholder="120000" required />
+              </div>
+
+              <div class="field">
+                <label for="AMT_ANNUITY">Annuity payment</label>
+                <input id="AMT_ANNUITY" name="AMT_ANNUITY" type="number" min="0" step="1" placeholder="5000" required />
+              </div>
+
+              <div class="field">
+                <label for="AMT_GOODS_PRICE">Goods price</label>
+                <input id="AMT_GOODS_PRICE" name="AMT_GOODS_PRICE" type="number" min="0" step="1" placeholder="140000" required />
+              </div>
+
+              <div class="field">
+                <label for="years_employed">Years employed</label>
+                <input id="years_employed" name="years_employed" type="number" min="0" max="50" step="1" placeholder="5" required />
+              </div>
+
+              <div class="field">
+                <label for="NAME_INCOME_TYPE">Income type</label>
+                <select id="NAME_INCOME_TYPE" name="NAME_INCOME_TYPE" required>
+                  <option value="">Select</option>
+                  <option value="Working">Working</option>
+                  <option value="Commercial associate">Commercial associate</option>
+                  <option value="Pensioner">Pensioner</option>
+                  <option value="State servant">State servant</option>
+                  <option value="Unemployed">Unemployed</option>
+                  <option value="Student">Student</option>
+                  <option value="Businessman">Businessman</option>
+                </select>
+              </div>
+
+              <div class="field">
+                <label for="NAME_EDUCATION_TYPE">Education level</label>
+                <select id="NAME_EDUCATION_TYPE" name="NAME_EDUCATION_TYPE" required>
+                  <option value="">Select</option>
+                  <option value="Secondary / secondary special">Secondary / secondary special</option>
+                  <option value="Higher education">Higher education</option>
+                  <option value="Incomplete higher">Incomplete higher</option>
+                  <option value="Lower secondary">Lower secondary</option>
+                  <option value="Academic degree">Academic degree</option>
+                </select>
+              </div>
+
+              <div class="field">
+                <label for="NAME_FAMILY_STATUS">Family status</label>
+                <select id="NAME_FAMILY_STATUS" name="NAME_FAMILY_STATUS" required>
+                  <option value="">Select</option>
+                  <option value="Single / not married">Single / not married</option>
+                  <option value="Married">Married</option>
+                  <option value="Civil marriage">Civil marriage</option>
+                  <option value="Separated">Separated</option>
+                  <option value="Widow">Widow</option>
+                </select>
+              </div>
+
+              <div class="field">
+                <label for="REGION_RATING_CLIENT">Region score</label>
+                <select id="REGION_RATING_CLIENT" name="REGION_RATING_CLIENT" required>
+                  <option value="">Select</option>
+                  <option value="1">1</option>
+                  <option value="2">2</option>
+                  <option value="3">3</option>
+                </select>
+              </div>
+
+              <div class="field">
+                <label for="EXT_SOURCE_1">External source 1</label>
+                <input id="EXT_SOURCE_1" name="EXT_SOURCE_1" type="text" inputmode="decimal" placeholder="0.65" required />
+              </div>
+
+              <div class="field">
+                <label for="EXT_SOURCE_2">External source 2</label>
+                <input id="EXT_SOURCE_2" name="EXT_SOURCE_2" type="text" inputmode="decimal" placeholder="0.75" required />
+              </div>
+
+              <div class="field">
+                <label for="EXT_SOURCE_3">External source 3</label>
+                <input id="EXT_SOURCE_3" name="EXT_SOURCE_3" type="text" inputmode="decimal" placeholder="0.80" required />
+              </div>
+            </div>
+
+            <div class="form-actions">
+              <button id="submitButton" type="submit">Generate prediction</button>
+              <span id="statusText" class="note">Fill out the form and run the assessment.</span>
+            </div>
+          </form>
+        </section>
+
+        <aside class="panel result-panel" id="resultPanel">
+          <div class="panel-header">
+            <h2>Risk Result</h2>
+            <span class="panel-tag alt">Model score</span>
+          </div>
+
+          <div class="result-box">
+            <div class="result-topline">
+              <span id="riskBadge" class="risk-badge risk-low">Pending</span>
+              <span class="mini-status-dot"></span>
+            </div>
+
+            <div class="score-ring" id="scoreRing">
+              <div class="score-ring-inner">
+                <div id="probabilityValue" class="probability">--</div>
+              </div>
+            </div>
+
+            <div id="riskDescription" class="result-description">Prediction details will appear here.</div>
+            <div class="metrics">
+              <div class="metric">
+                <span>Decision threshold</span>
+                <strong id="thresholdValue">--</strong>
+              </div>
+              <div class="metric">
+                <span>Portfolio base rate</span>
+                <strong id="baseRateValue">--</strong>
+              </div>
+              <div class="metric">
+                <span>Risk vs. average</span>
+                <strong id="liftValue">--</strong>
+              </div>
+              <div class="metric">
+                <span>Fields supplied</span>
+                <strong id="featureCountValue">--</strong>
+              </div>
+            </div>
+            <p id="calibrationNote" class="calibration-note">
+              Model metadata loading&hellip;
+            </p>
+          </div>
+        </aside>
+      </main>
+    </div>
+
+    <script src="/static/app.js"></script>
+  </body>
+</html>

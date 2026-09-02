@@ -1,0 +1,35 @@
+{
+    "model": "LightGBM + isotonic calibration",
+    "search": "RandomizedSearchCV",
+    "calibrated": true,
+    "calibration_method": "isotonic",
+    "target": "TARGET",
+    "random_state": 42,
+    "threshold": 0.17,
+    "threshold_metric": "F1 on calibrated validation probabilities",
+    "threshold_alternatives": {
+        "conventional": 0.5,
+        "cost_optimal_10_to_1": 0.1,
+        "f1_optimal_uncalibrated": 0.65
+    },
+    "train_default_rate": 0.08072908198107379,
+    "engineered_features": {
+        "CREDIT_INCOME_RATIO": "AMT_CREDIT / AMT_INCOME_TOTAL",
+        "ANNUITY_INCOME_RATIO": "AMT_ANNUITY / AMT_INCOME_TOTAL",
+        "CREDIT_ANNUITY_RATIO": "AMT_CREDIT / AMT_ANNUITY",
+        "DAYS_EMPLOYED_ANOM": "1 if DAYS_EMPLOYED == 365243 else 0"
+    },
+    "days_employed_placeholder": 365243,
+    "test_metrics": {
+        "roc_auc": 0.7671233032871475,
+        "pr_auc": 0.2436279876610353,
+        "brier": 0.0672346056588436,
+        "brier_constant_baseline": 0.07421079663022367
+    },
+    "versions": {
+        "scikit_learn": "1.7.2",
+        "lightgbm": "4.6.0",
+        "pandas": "2.3.3",
+        "numpy": "2.3.5"
+    }
+}
