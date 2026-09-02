@@ -15,10 +15,15 @@ exploratory analysis through a calibrated model to a served scoring interface.
 You can spin up the application in seconds without worrying about local Python dependencies:
 
 ```bash
+git clone https://github.com/emirkarali/credit-risk-scoring.git
+cd credit-risk-scoring
 docker build -t credit-risk-app .
 docker run -p 8000:8000 credit-risk-app
 ```
-Then open your browser and navigate to http://localhost:8000
+
+Then open your browser and navigate to <http://localhost:8000>
+
+> Requires Docker Desktop (or Docker Engine) installed and running.
 
 ---
 
