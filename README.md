@@ -10,7 +10,7 @@ exploratory analysis through a calibrated model to a served scoring interface.
 
 ---
 
-## 🚀 Quick Start with Docker
+## Quick Start with Docker
 
 You can spin up the application in seconds without worrying about local Python dependencies:
 
