@@ -29,8 +29,6 @@ Then open your browser and navigate to <http://localhost:8000>
 
 ## Results
 
-## Results
-
 | Metric | Value | Baseline / Note |
 | --- | --- | --- |
 | Model | LightGBM (RandomizedSearchCV, 3-fold CV) + Isotonic Calibration | |
